@@ -175,18 +175,38 @@ function populatePassword() {
 
 function randomize(orderedPassword) {
 
-    var ordrPass = orderedPassword;
-    var jumble = "";
+    console.log(orderedPassword);
+    var ordrPass = orderedPassword.split("");
+    var ordrArr = [];
+  
+    console.log(ordrPass);
 
-
-    for (var i = 0; i < (ordrPass.length); i++) {
+    for (var i = 0; i < orderedPassword.length; i++) {
 
         var x = Math.floor(Math.random() * ordrPass.length);
+        ordrArr.push(ordrPass[x]);
 
-        jumble = jumble.concat(ordrPass.charAt(x));
-        ordrPass = ordrPass.substring(x - 1, ordrPass.length - 1);
-    }
+        ordrPass.splice(x, 1);
 
-    console.log(jumble);
-    return jumble;
+         }
+
+         
+         console.log(ordrArr.join(""));
+         return ordrArr.join("")
 }
+
+    // for (var i = 0; i < ordrPass.length; i++) {
+
+    //     ordrArr[i] = ordrPass.charAt(i);
+    //     console.log("c. i = " + i);
+
+    // }
+    // for (var i = 0; i < ordrArr.length; i++) {
+
+    //     var x = Math.floor(Math.random() * ordrArr.length);
+    //     console.log(i + "x = " + x);
+
+
+    //     jumble = jumble.concat(ordrArr[x]);
+    //     ordrArr = ordrArr.splice(x);
+    // }
