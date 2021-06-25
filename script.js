@@ -2,11 +2,11 @@
 var generateBtn = document.querySelector("#generate");
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword());
+generateBtn.addEventListener("click", writePassword);
 
 // Write password to the #password input
 function writePassword() {
-    
+
     var password = generatePassword();
     var passwordText = document.querySelector("#password");
 
@@ -36,7 +36,8 @@ function generatePassword() {
         }
     } while (!confirmSelection)
 
-    populatePassword();
+    return populatePassword();
+
 }
 
 //a function to set parameters of desired password
@@ -58,11 +59,11 @@ function passwordPrompts() {
             alert("Error: Please enter an integer")
         }
         //checks if input meets minimum size requirements
-        else if (userInput <= 8) {
+        else if (userInput < 8) {
             alert("Error: password length must be no less than 8 characters");
         }
         //checks if input meets maximum size requirements
-        else if (userInput > 128) {
+        else if (userInput >= 128) {
             alert("Error: password length must be no more than 128 characters");
         }
         // set value if conditions are passed
@@ -118,9 +119,9 @@ function passwordPrompts() {
             }
         }
 
-        return confirmMsg;
+       return confirmMsg;
     }
-
+ 
 }
 
 function populatePassword() {
@@ -131,45 +132,47 @@ function populatePassword() {
     var instTrue = 0;
     //variable loop amount
     var loopAmt = 0
+    var result = "";
+    // //determines how many true values in array
+    // for (var i = 0; i < pwCriteriaArr.length; i++) {
+    //     if (pwCriteriaArr[i] === true) instTrue++;
+    // }
 
-    //determines how many true values in array
-    for (var i = 0; i < pwCriteriaArr.length; i++) {
-        if (pwCriteriaArr[i] === true) instTrue++;
-    }
+    // //calculate how many times to loop
+    // loopAmt = Math.floor(pwLength / instTrue) + Math.ceil(pwLength % instTrue);
+    // console.log("   . . . . . . . loopAmt =" + loopAmt);
 
-    //calculate how mant times to loop
-    loopAmt = (pwLength / instTrue) + (pwLength % instTrue);
-    console.log("   . . . . . . . loopAmt =" + loopAmt);
+    var x = 0;
+    for (var i = 0; i < pwLength; i++, x++) {
+        if (x === 4) {x = 0;}
 
-    for (var i = 0; i < loopAmt; i++) {
-        var typesArr = ["lowercase", "uppercase", "numeric", "special"];
-
-        if (typesArr[i]) {
+        if (typesArr[0] && x === 0) {
             //lower
             result += letterC.charAt(Math.floor(Math.random() * letterC.length));
             console.log("i: " + i + " || result: " + result);
         }
 
-        else if (typesArr[i]) {
+        else if (typesArr[1] && x === 1) {
             //upper
-            result += letterC.charAt(Math.floor(Math.random() * letterC.length)).toUpperCase;
+            result += letterC.charAt(Math.floor(Math.random() * letterC.length)).toUpperCase();
             console.log("i: " + i + " || result: " + result);
         }
 
-        else if (typesArr[i]) {
+        else if (typesArr[2] && x === 2) {
             //number
             result += Math.floor(Math.random() * 10);
             console.log("i: " + i + " || result: " + result);
         }
 
-        else if (typesArr[i]) {
+        else if (typesArr[3] && x === 3) {
             //special
             result += specialC.charAt(Math.floor(Math.random() * specialC.length));
             console.log("i: " + i + " || result: " + result);
         }
-        else alert("Error in propagate if statement");
+
 
         password = password.concat(result);
+        result = ""
     }
 
     return password;
