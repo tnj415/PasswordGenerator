@@ -124,7 +124,7 @@ function passwordPrompts() {
 function populatePassword() {
 
     var letterC = "abcdefghijklmnopqustuvwxyz";
-    var specialC = "`~!@#$%^*&()-=_+[]\{}|;':./";
+    var specialC = "`~!@#$%^*&()-=_+[]{}|;':./";
     var popPass = "";
     var result = "";
 
