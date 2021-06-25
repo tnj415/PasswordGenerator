@@ -58,7 +58,7 @@ function passwordPrompts() {
             alert("Error: Please enter an integer")
         }
         //checks if input meets minimum size requirements
-        else if (userInput < 8) {
+        else if (userInput <= 8) {
             alert("Error: password length must be no less than 8 characters");
         }
         //checks if input meets maximum size requirements
@@ -147,25 +147,21 @@ function populatePassword() {
         if (typesArr[0] && x === 0) {
             //lower
             result += letterC.charAt(Math.floor(Math.random() * letterC.length));
-            console.log("i: " + i + " || result: " + result);
         }
 
         else if (typesArr[1] && x === 1) {
             //upper
             result += letterC.charAt(Math.floor(Math.random() * letterC.length)).toUpperCase();
-            console.log("i: " + i + " || result: " + result);
         }
 
         else if (typesArr[2] && x === 2) {
             //number
             result += Math.floor(Math.random() * 10);
-            console.log("i: " + i + " || result: " + result);
         }
 
         else if (typesArr[3] && x === 3) {
             //special
             result += specialC.charAt(Math.floor(Math.random() * specialC.length));
-            console.log("i: " + i + " || result: " + result);
         }
 
 
@@ -173,19 +169,24 @@ function populatePassword() {
         result = ""
     }
 
-    var submitPassword = randomize(popPass);
-    return submitPassword;
+    console.log(popPass);
+    return randomize(popPass);
 }
 
-// function randomize (orderedPassword) {
+function randomize(orderedPassword) {
 
-//     var ordrPass = orderedPassword;
-//     var jumble = "";
+    var ordrPass = orderedPassword;
+    var jumble = "";
 
-//     for (var i = 0; i < ordr.length; i++) {
 
-//         jumble.charAt(i) = order.charAt(i);
-//     }
+    for (var i = 0; i < (ordrPass.length); i++) {
 
-//     return jumble;
-// }
+        var x = Math.floor(Math.random() * ordrPass.length);
+
+        jumble = jumble.concat(ordrPass.charAt(x));
+        ordrPass = ordrPass.substring(x - 1, ordrPass.length - 1);
+    }
+
+    console.log(jumble);
+    return jumble;
+}
