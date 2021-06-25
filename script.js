@@ -37,7 +37,6 @@ function generatePassword() {
     } while (!confirmSelection)
 
     return populatePassword();
-
 }
 
 //a function to set parameters of desired password
@@ -174,5 +173,19 @@ function populatePassword() {
         result = ""
     }
 
-    return password;
+    var submitPassword = randomize(popPass);
+    return submitPassword;
 }
+
+// function randomize (orderedPassword) {
+
+//     var ordrPass = orderedPassword;
+//     var jumble = "";
+
+//     for (var i = 0; i < ordr.length; i++) {
+
+//         jumble.charAt(i) = order.charAt(i);
+//     }
+
+//     return jumble;
+// }
