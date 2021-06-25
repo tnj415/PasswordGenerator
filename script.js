@@ -14,8 +14,6 @@ function writePassword() {
 
 };
 
-//password
-//var completedPassword = "";
 // true of false values to reference "typesArr" values
 var pwCriteriaArr = [false, false, false, false];
 // Array of types of characters in password
@@ -26,6 +24,7 @@ var confirmSelection = true;
 
 
 function generatePassword() {
+
     //a check to see if user accepts the parameters set
     do {
         passwordPrompts();
@@ -58,7 +57,7 @@ function passwordPrompts() {
             alert("Error: Please enter an integer")
         }
         //checks if input meets minimum size requirements
-        else if (userInput <= 8) {
+        else if (userInput < 8) {
             alert("Error: password length must be no less than 8 characters");
         }
         //checks if input meets maximum size requirements
@@ -77,9 +76,11 @@ function passwordPrompts() {
 
     do {
         //loop to promp user for types of characters in array
-        for (var i = 0; i < pwCriteriaArr.length; i++)
+        for (var i = 0; i < pwCriteriaArr.length; i++) {
             //set indexes depending to true if user wants a specific type of character
             pwCriteriaArr[i] = confirm("Do you want the password to have " + typesArr[i] + " characters?");
+            //console.log(pwCriteriaArr[i]);
+        }
 
         //save first index of true
         fit = pwCriteriaArr.indexOf(true);
@@ -112,75 +113,68 @@ function passwordPrompts() {
                 else {
                     confirmMsg += ", " + typesArr[i]
                 }
-
-
             }
         }
 
+        //return string to complete sentence
         return confirmMsg;
     }
-
 }
 
 function populatePassword() {
-    var popPass = "";
-    var letterC = "abcdefghijklmnopqustuvwxyz";
-    var specialC = "`~!@#$%^*&()-=_+[]\{}|;':./"
-    //variable to count instances of true
-    //var instTrue = 0;
-    //variable loop amount
-    //var loopAmt = 0
-    var result = "";
-    // //determines how many true values in array
-    // for (var i = 0; i < pwCriteriaArr.length; i++) {
-    //     if (pwCriteriaArr[i] === true) instTrue++;
-    // }
 
-    // //calculate how many times to loop
-    // loopAmt = Math.floor(pwLength / instTrue) + Math.ceil(pwLength % instTrue);
-    // console.log("   . . . . . . . loopAmt =" + loopAmt);
+    var letterC = "abcdefghijklmnopqustuvwxyz";
+    var specialC = "`~!@#$%^*&()-=_+[]\{}|;':./";
+    var popPass = "";
+    var result = "";
+
 
     var x = 0;
     for (var i = 0; i < pwLength; i++, x++) {
         if (x === 4) { x = 0; }
 
-        if (typesArr[0] && x === 0) {
+        if (pwCriteriaArr[0] && x === 0) {
             //lower
             result += letterC.charAt(Math.floor(Math.random() * letterC.length));
         }
-
-        else if (typesArr[1] && x === 1) {
+        else if (pwCriteriaArr[1] && x === 1) {
             //upper
             result += letterC.charAt(Math.floor(Math.random() * letterC.length)).toUpperCase();
         }
-
-        else if (typesArr[2] && x === 2) {
+        else if (pwCriteriaArr[2] && x === 2) {
             //number
             result += Math.floor(Math.random() * 10);
         }
-
-        else if (typesArr[3] && x === 3) {
+        else if (pwCriteriaArr[3] && x === 3) {
             //special
             result += specialC.charAt(Math.floor(Math.random() * specialC.length));
         }
+        else i--;
 
-
+//assign variable values that met conditions in if statement
         popPass = popPass.concat(result);
-        result = ""
+        //reset string every iteration of loop
+        result = "";
+        console.log(popPass);
     }
 
     console.log(popPass);
     return randomize(popPass);
 }
 
+//takes the ordered-"randomly generated password" and randomizes the characters indexes
 function randomize(orderedPassword) {
 
-    console.log(orderedPassword);
+    //check parameter was passed into function with correct info
+    ////console.log(orderedPassword);
     var ordrPass = orderedPassword.split("");
     var ordrArr = [];
-  
-    console.log(ordrPass);
 
+  //check variable was reassigned correct info
+   ////console.log(ordrPass);
+
+
+//used function parameter because we dont change its content
     for (var i = 0; i < orderedPassword.length; i++) {
 
         var x = Math.floor(Math.random() * ordrPass.length);
@@ -189,24 +183,7 @@ function randomize(orderedPassword) {
         ordrPass.splice(x, 1);
 
          }
-
          
-         console.log(ordrArr.join(""));
+         ////console.log(ordrArr.join(""));
          return ordrArr.join("")
 }
-
-    // for (var i = 0; i < ordrPass.length; i++) {
-
-    //     ordrArr[i] = ordrPass.charAt(i);
-    //     console.log("c. i = " + i);
-
-    // }
-    // for (var i = 0; i < ordrArr.length; i++) {
-
-    //     var x = Math.floor(Math.random() * ordrArr.length);
-    //     console.log(i + "x = " + x);
-
-
-    //     jumble = jumble.concat(ordrArr[x]);
-    //     ordrArr = ordrArr.splice(x);
-    // }
