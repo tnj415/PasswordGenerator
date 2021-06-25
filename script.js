@@ -63,7 +63,7 @@ function passwordPrompts() {
             alert("Error: password length must be no less than 8 characters");
         }
         //checks if input meets maximum size requirements
-        else if (userInput >= 128) {
+        else if (userInput > 128) {
             alert("Error: password length must be no more than 128 characters");
         }
         // set value if conditions are passed
@@ -96,10 +96,9 @@ function passwordPrompts() {
     //confirm selection
     //calls a function that returns a string with appropriate description of the user's selection
     confirmSelection = confirm("Confirm: You want your password to be " + pwLength + " characters with ONLY " + loopPwc() + " characters?");
-
     //returns string of description of user's selection
     function loopPwc() {
-
+        confirmMsg = "";
         for (var i = 0; i < pwCriteriaArr.length; i++) {
 
             //if true value in the array (that corresponds to the array of character types) then populate the string with 
@@ -119,19 +118,19 @@ function passwordPrompts() {
             }
         }
 
-       return confirmMsg;
+        return confirmMsg;
     }
- 
+
 }
 
 function populatePassword() {
-    var password = "";
+    var popPass = "";
     var letterC = "abcdefghijklmnopqustuvwxyz";
     var specialC = "`~!@#$%^*&()-=_+[]\{}|;':./"
     //variable to count instances of true
-    var instTrue = 0;
+    //var instTrue = 0;
     //variable loop amount
-    var loopAmt = 0
+    //var loopAmt = 0
     var result = "";
     // //determines how many true values in array
     // for (var i = 0; i < pwCriteriaArr.length; i++) {
@@ -144,7 +143,7 @@ function populatePassword() {
 
     var x = 0;
     for (var i = 0; i < pwLength; i++, x++) {
-        if (x === 4) {x = 0;}
+        if (x === 4) { x = 0; }
 
         if (typesArr[0] && x === 0) {
             //lower
@@ -171,7 +170,7 @@ function populatePassword() {
         }
 
 
-        password = password.concat(result);
+        popPass = popPass.concat(result);
         result = ""
     }
 
